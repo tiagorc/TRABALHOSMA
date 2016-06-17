@@ -1,5 +1,6 @@
 package behaviours;
 
+import agents.RobotAgent;
 import jade.core.AID;
 import jade.core.Agent;
 
@@ -7,7 +8,6 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
 
 
 public class RobotBehaviour extends CyclicBehaviour{
@@ -28,10 +28,11 @@ public class RobotBehaviour extends CyclicBehaviour{
 		//o agente vai verificar se recebeu ou nao alguma mensagem
 		if (countActions == 0) {//primeira mensagem
 			//enviar a primeira mensagem
+			sendFirstMessage();
 		}else {
 			if (message != null) {
 				System.out.println(message.getContent());
-//				sendNewMessage();
+				send_new_message();
 			}else {
 				this.block();
 			}
@@ -43,7 +44,11 @@ public class RobotBehaviour extends CyclicBehaviour{
 		AID receiver = new AID ("irsensor", AID.ISLOCALNAME);
 		ACLMessage first_message = new ACLMessage(ACLMessage.REQUEST);
 		first_message.addReceiver(receiver);
-		first_message.setContent(myAgent.getLocalName() + "May I move forwards?");
+		first_message.setContent(RobotAgent.MAYIMOVEFORWARD);
 		myAgent.send(first_message);
+	}
+	
+	private String send_new_message () {
+		return "asdas";
 	}
 }
