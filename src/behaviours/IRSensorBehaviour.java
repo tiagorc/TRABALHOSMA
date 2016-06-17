@@ -1,5 +1,7 @@
 package behaviours;
 
+import agents.IRSensorAgent;
+import agents.RobotAgent;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.ProfileImpl;
@@ -13,17 +15,31 @@ import jade.core.behaviours.OneShotBehaviour;
 
 public class IRSensorBehaviour extends CyclicBehaviour{
 
+	private static final MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);	
+	ACLMessage robotMsg;
+
 	public IRSensorBehaviour(Agent agent){
 		super(agent);
 	}
 	
 	@Override
 	public void action() {
-		ACLMessage msg = myAgent.receive();
-		if(msg != null){
-
+		robotMsg = myAgent.receive(mt);
+		if(robotMsg != null){
+			if(robotMsg.equals(RobotAgent.MAYIMOVEFORWARD)){
+				sendMessage(IRSensorAgent.yes);
+			}
+		}else{
+			this.block();
 		}
 		
 	}
 
+	private void sendMessage(String message){
+		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+		msg.addReceiver(robotMsg.getSender());
+		msg.setContent(message);
+		myAgent.send(msg);	
+	}
+	
 }
