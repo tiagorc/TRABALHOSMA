@@ -1,5 +1,6 @@
 package agents;
 
+import behaviours.RobotBehaviour;
 import jade.core.Agent;
 
 
@@ -25,7 +26,7 @@ public class RobotAgent extends Agent {
 		try {
 			System.out.println( getLocalName() + " setting up!");
             
-            //addbehaviour
+			this.addBehaviour(new RobotBehaviour(this));
 		}
         catch (Exception e) {
             System.out.println( "Saw exception in HostAgent: " + e );

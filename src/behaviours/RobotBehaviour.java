@@ -46,6 +46,7 @@ public class RobotBehaviour extends CyclicBehaviour{
 		first_message.addReceiver(receiver);
 		first_message.setContent(RobotAgent.MAYIMOVEFORWARD);
 		myAgent.send(first_message);
+		System.out.println("Robot send first message!");
 	}
 	
 	private String send_new_message () {
