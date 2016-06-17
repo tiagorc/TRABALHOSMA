@@ -2,19 +2,16 @@ package behaviours;
 
 import agents.IRSensorAgent;
 import agents.RobotAgent;
-import jade.core.AID;
 import jade.core.Agent;
-import jade.core.ProfileImpl;
-import jade.core.Profile;
-import jade.wrapper.PlatformController;
-import jade.wrapper.AgentController;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
+
+import java.util.Random;
 
 public class IRSensorBehaviour extends CyclicBehaviour{
-
+	private static final long serialVersionUID = 1L;
+	
 	private static final MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);	
 	ACLMessage robotMsg;
 
@@ -26,31 +23,43 @@ public class IRSensorBehaviour extends CyclicBehaviour{
 	public void action() {
 		robotMsg = myAgent.receive(mt);
 		if(robotMsg != null){
-			System.out.println(robotMsg.getContent());
-			switch (robotMsg.getContent()) {
-			case RobotAgent.MAYIMOVEFORWARD:
-				sendMessage(IRSensorAgent.yes);
-				System.out.println("Go forward!");
-				break;
-			case RobotAgent.MAYIMOVEBACKWARD:
-				sendMessage(IRSensorAgent.yes);
-				System.out.println("Go backward!");
-				break;
-			case RobotAgent.MAYITURNLEFT:
-				sendMessage(IRSensorAgent.yes);
-				System.out.println("Turn left!");
-				break;
-			case RobotAgent.MAYITURNRIGHT:
-				sendMessage(IRSensorAgent.yes);
-				System.out.println("Turn right!");
-				break;
-			default:
-				break;
+			String decision = decision();
+			
+			if (decision == IRSensorAgent.no) {
+				sendMessage(IRSensorAgent.no);
+			}else {
+				switch (robotMsg.getContent()) {
+				case RobotAgent.MAYIMOVEFORWARD:
+					sendMessage(RobotAgent.MOVEFORWARD);
+					break;
+				case RobotAgent.MAYIMOVEBACKWARD:
+					sendMessage(RobotAgent.MOVEBACKWARD);
+					break;
+				case RobotAgent.MAYITURNLEFT:
+					sendMessage(RobotAgent.TURNLEFT);
+					break;
+				case RobotAgent.MAYITURNRIGHT:
+					sendMessage(RobotAgent.TURNRIGHT);
+					break;
+				default:
+					break;
+				}
 			}
 		}else{
 			this.block();
 		}
-		
+	}
+	
+	private String decision() {
+		int min = 0;
+		int max = 1;
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		if (randomNum == 0) {
+			return IRSensorAgent.yes;
+		}else {
+			return IRSensorAgent.no;
+		}
 	}
 
 	private void sendMessage(String message){

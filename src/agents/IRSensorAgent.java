@@ -3,13 +3,9 @@ package agents;
 import behaviours.IRSensorBehaviour;
 import jade.core.Agent;
 
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
-import jade.domain.DFService;
-import jade.domain.FIPAException;
-
 public class IRSensorAgent extends Agent{
-
+	private static final long serialVersionUID = 1L;
+	
 	public final static String yes= "Yes";
 	public final static String no= "No";
 	
@@ -19,5 +15,9 @@ public class IRSensorAgent extends Agent{
 		
 		this.addBehaviour(new IRSensorBehaviour(this));
 		
+	}
+	
+	protected void take_down() {
+		System.out.println("take_down sensor");
 	}
 }

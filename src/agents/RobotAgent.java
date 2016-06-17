@@ -35,6 +35,7 @@ public class RobotAgent extends Agent {
 	}
 	
 	protected void take_down() {
+		System.out.println("take_down robot");
 		try{
 			System.out.println(getLocalName() + " shut down!");
 		}catch (Exception e) {
@@ -43,31 +44,23 @@ public class RobotAgent extends Agent {
 		}
 	}
 	
-	private void move_or_turn(boolean answer, String message) {
-		if (answer == true) {
-			switch (message) {
-			case MOVEFORWARD:
-				System.out.println(message);
-				break;
-			case MOVEBACKWARD:
-				System.out.println(message);
-				break;
-			case TURNLEFT:
-				System.out.println(message);
-				break;
-			case TURNRIGHT:
-				System.out.println(message);
-				break;
-			default:
-				System.out.println("Unable to move..");
-				break;
-			}
-		}else {
-			System.out.println(OKAY);
+	public static void move_or_turn(String message) {
+		switch (message) {
+		case MOVEFORWARD:
+			System.out.println(message);
+			break;
+		case MOVEBACKWARD:
+			System.out.println(message);
+			break;
+		case TURNLEFT:
+			System.out.println(message);
+			break;
+		case TURNRIGHT:
+			System.out.println(message);
+			break;
+		default:
+			System.out.println("Unable to move..");
+			break;
 		}
-	}
-	
-	private void shut_down_robot() {
-		  
 	}
 }

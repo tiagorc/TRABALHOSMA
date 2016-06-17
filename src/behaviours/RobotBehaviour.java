@@ -1,5 +1,6 @@
 package behaviours;
 
+import agents.IRSensorAgent;
 import agents.RobotAgent;
 import jade.core.AID;
 import jade.core.Agent;
@@ -7,12 +8,12 @@ import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.SimpleBehaviour;
 
 import java.util.Random;
 
 
-public class RobotBehaviour extends CyclicBehaviour{
+public class RobotBehaviour extends SimpleBehaviour{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -20,6 +21,8 @@ public class RobotBehaviour extends CyclicBehaviour{
 	ACLMessage message;
 	
 	int countActions = 0;//conta quantas mensagens foram trocadas
+	
+	public final static int TOTAL_MESSAGES = 10;
 	
 	public RobotBehaviour(Agent agent){
 		super (agent);
@@ -31,11 +34,15 @@ public class RobotBehaviour extends CyclicBehaviour{
 		if (countActions == 0) {//primeira mensagem
 			//enviar a primeira mensagem
 			sendFirstMessage();
-			countActions++;
 		}else {
 			message = myAgent.receive(mt);
 			if (message != null) {
-				send_new_message();
+				if (message.getContent() == IRSensorAgent.no){
+					System.out.println(RobotAgent.OKAY);
+				}else {
+					RobotAgent.move_or_turn(message.getContent());
+				}
+				send_message();
 			}else {
 				this.block();
 			}
@@ -75,4 +82,22 @@ public class RobotBehaviour extends CyclicBehaviour{
 		}
 		return message;
 	}
+	
+	private void send_message() {
+		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
+	    msg.addReceiver(message.getSender());
+	    msg.setContent(send_new_message());
+	    myAgent.send(msg);
+	}
+
+	@Override
+	public boolean done() {
+		if (countActions == TOTAL_MESSAGES)
+		      myAgent.doDelete();
+		    else
+		      countActions++;
+
+		    return false;
+	}
+	
 }
