@@ -9,7 +9,7 @@ public class RobotAgent extends Agent {
 	private static final long serialVersionUID = 1L;
 	
 	//ask
-	public final static String MAYIMOVEFORWARD = "May I mode forward?";
+	public final static String MAYIMOVEFORWARD = "May I move forward?";
 	public final static String MAYIMOVEBACKWARD = "May I move backward?";
 	public final static String MAYITURNLEFT = "May I turn left?";
 	public final static String MAYITURNRIGHT = "May I turn right?";

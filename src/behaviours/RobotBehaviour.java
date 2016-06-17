@@ -33,8 +33,8 @@ public class RobotBehaviour extends CyclicBehaviour{
 			sendFirstMessage();
 			countActions++;
 		}else {
+			message = myAgent.receive(mt);
 			if (message != null) {
-				System.out.println(message.getContent());
 				send_new_message();
 			}else {
 				this.block();
