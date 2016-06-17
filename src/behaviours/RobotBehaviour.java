@@ -38,7 +38,7 @@ public class RobotBehaviour extends SimpleBehaviour{
 			message = myAgent.receive(mt);
 			if (message != null) {
 				if (message.getContent() == IRSensorAgent.no){
-					System.out.println(RobotAgent.OKAY);
+					System.out.println(RobotAgent.OKAY + "\n");
 				}else {
 					RobotAgent.move_or_turn(message.getContent());
 				}

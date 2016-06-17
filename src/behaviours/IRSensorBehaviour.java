@@ -22,8 +22,13 @@ public class IRSensorBehaviour extends CyclicBehaviour{
 	@Override
 	public void action() {
 		robotMsg = myAgent.receive(mt);
+		
 		if(robotMsg != null){
+			System.out.println(robotMsg.getContent());
+			
 			String decision = decision();
+			
+			System.out.println(decision);
 			
 			if (decision == IRSensorAgent.no) {
 				sendMessage(IRSensorAgent.no);

@@ -47,19 +47,19 @@ public class RobotAgent extends Agent {
 	public static void move_or_turn(String message) {
 		switch (message) {
 		case MOVEFORWARD:
-			System.out.println(message);
+			System.out.println(message + "\n");
 			break;
 		case MOVEBACKWARD:
-			System.out.println(message);
+			System.out.println(message + "\n");
 			break;
 		case TURNLEFT:
-			System.out.println(message);
+			System.out.println(message + "\n");
 			break;
 		case TURNRIGHT:
-			System.out.println(message);
+			System.out.println(message + "\n");
 			break;
 		default:
-			System.out.println(OKAY);
+			System.out.println(OKAY + "\n");
 			break;
 		}
 	}
