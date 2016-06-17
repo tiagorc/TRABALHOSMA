@@ -59,7 +59,7 @@ public class RobotAgent extends Agent {
 			System.out.println(message);
 			break;
 		default:
-			System.out.println("Unable to move..");
+			System.out.println(OKAY);
 			break;
 		}
 	}
