@@ -1,11 +1,6 @@
 package agents;
 
 import jade.core.Agent;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
-import jade.domain.DFService;
-import jade.domain.FIPAException;
-
 
 
 public class RobotAgent extends Agent {
@@ -29,11 +24,6 @@ public class RobotAgent extends Agent {
 	protected void setup() {
 		try {
 			System.out.println( getLocalName() + " setting up!");
-			
-			// create the agent descrption of itself
-			DFAgentDescription dfd = new DFAgentDescription();
-            dfd.setName( getAID() );
-            DFService.register( this, dfd );
             
             //addbehaviour
 		}
@@ -72,12 +62,6 @@ public class RobotAgent extends Agent {
 	}
 	
 	private void shut_down_robot() {
-		try {
-			DFService.deregister( this );
-			doDelete();
-		} catch (FIPAException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}   
+		  
 	}
 }
