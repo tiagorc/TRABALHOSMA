@@ -26,10 +26,26 @@ public class IRSensorBehaviour extends CyclicBehaviour{
 	public void action() {
 		robotMsg = myAgent.receive(mt);
 		if(robotMsg != null){
-			System.out.println("Sensor received message!");
-			if(robotMsg.getContent().equals(RobotAgent.MAYIMOVEFORWARD)){
+			System.out.println(robotMsg.getContent());
+			switch (robotMsg.getContent()) {
+			case RobotAgent.MOVEFORWARD:
 				sendMessage(IRSensorAgent.yes);
 				System.out.println("Go forward!");
+				break;
+			case RobotAgent.MOVEBACKWARD:
+				sendMessage(IRSensorAgent.yes);
+				System.out.println("Go backward!");
+				break;
+			case RobotAgent.TURNLEFT:
+				sendMessage(IRSensorAgent.yes);
+				System.out.println("Turn left!");
+				break;
+			case RobotAgent.TURNRIGHT:
+				sendMessage(IRSensorAgent.yes);
+				System.out.println("Turn right!");
+				break;
+			default:
+				break;
 			}
 		}else{
 			this.block();

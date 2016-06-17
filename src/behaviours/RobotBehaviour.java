@@ -31,6 +31,7 @@ public class RobotBehaviour extends CyclicBehaviour{
 		if (countActions == 0) {//primeira mensagem
 			//enviar a primeira mensagem
 			sendFirstMessage();
+			countActions++;
 		}else {
 			if (message != null) {
 				System.out.println(message.getContent());
@@ -48,7 +49,7 @@ public class RobotBehaviour extends CyclicBehaviour{
 		first_message.addReceiver(receiver);
 		first_message.setContent(send_new_message());
 		myAgent.send(first_message);
-		System.out.println("Robot send first message!");
+		System.out.println("******Comunication work's!******\n\n");
 	}
 	
 	private String send_new_message () {
@@ -61,12 +62,16 @@ public class RobotBehaviour extends CyclicBehaviour{
 		switch (randomNum) {
 		case 0:
 			message = RobotAgent.MAYIMOVEBACKWARD;
+			break;
 		case 1:
 			message = RobotAgent.MAYIMOVEFORWARD;
+			break;
 		case 2:
 			message = RobotAgent.MAYITURNLEFT;
+			break;
 		default:
 			message = RobotAgent.MAYITURNRIGHT;
+			break;
 		}
 		return message;
 	}

@@ -48,14 +48,19 @@ public class RobotAgent extends Agent {
 			switch (message) {
 			case MOVEFORWARD:
 				System.out.println(message);
+				break;
 			case MOVEBACKWARD:
 				System.out.println(message);
+				break;
 			case TURNLEFT:
 				System.out.println(message);
+				break;
 			case TURNRIGHT:
 				System.out.println(message);
+				break;
 			default:
 				System.out.println("Unable to move..");
+				break;
 			}
 		}else {
 			System.out.println(OKAY);
