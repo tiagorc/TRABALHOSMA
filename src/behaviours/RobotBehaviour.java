@@ -9,6 +9,8 @@ import jade.lang.acl.MessageTemplate;
 
 import jade.core.behaviours.CyclicBehaviour;
 
+import java.util.Random;
+
 
 public class RobotBehaviour extends CyclicBehaviour{
 
@@ -44,11 +46,27 @@ public class RobotBehaviour extends CyclicBehaviour{
 		AID receiver = new AID ("irsensor", AID.ISLOCALNAME);
 		ACLMessage first_message = new ACLMessage(ACLMessage.REQUEST);
 		first_message.addReceiver(receiver);
-		first_message.setContent(RobotAgent.MAYIMOVEFORWARD);
+		first_message.setContent(send_new_message());
 		myAgent.send(first_message);
 	}
 	
 	private String send_new_message () {
-		return "asdas";
+		int min = 0;
+		int max = 3;
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max - min) + 1) + min;
+		
+		String message = "";
+		switch (randomNum) {
+		case 0:
+			message = RobotAgent.MAYIMOVEBACKWARD;
+		case 1:
+			message = RobotAgent.MAYIMOVEFORWARD;
+		case 2:
+			message = RobotAgent.MAYITURNLEFT;
+		default:
+			message = RobotAgent.MAYITURNRIGHT;
+		}
+		return message;
 	}
 }
