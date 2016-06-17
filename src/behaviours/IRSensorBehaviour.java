@@ -10,16 +10,19 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
-import jade.domain.DFService;
-import jade.domain.FIPAException;
 
 public class IRSensorBehaviour extends CyclicBehaviour{
 
+	public IRSensorBehaviour(Agent agent){
+		super(agent);
+	}
+	
 	@Override
 	public void action() {
-		// TODO Auto-generated method stub
+		ACLMessage msg = myAgent.receive();
+		if(msg != null){
+
+		}
 		
 	}
 
